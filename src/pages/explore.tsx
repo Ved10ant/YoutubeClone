@@ -1,10 +1,10 @@
 import Navbar from "../components/ui/Navbar";
 import React from "react";
-import CategoryTabs from "@/components/CategoryTabs";
 import Sidebar from "@/components/Sidebar";
+import CategoryTabs from "@/components/CategoryTabs";
 import VideoGrid from "@/components/VideoGrid";
 
-const Index = () => {
+const ExplorePage = () => {
   return (
     <div className="h-full bg-white text-black flex flex-col">
       <Navbar />
@@ -24,4 +24,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default ExplorePage;
