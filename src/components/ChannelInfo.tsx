@@ -1,8 +1,8 @@
 import { useRouter } from "next/router";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "./ui/button";
-import { ALL_VIDEOS } from "@/pages/DataContent/Data";
-import { useState } from "react";
+import { ALL_VIDEOS, user } from "@/pages/DataContent/Data";
+import { useState, useEffect } from "react";
 import {
   Clock,
   Download,
@@ -26,10 +26,51 @@ const ChannelInfo = () => {
   const [isLiked, setIsLiked] = useState(false);
   const [isDisliked, setIsDisliked] = useState(false);
   const [showFullDescription, setShowFullDescription] = useState(false);
-  const [isWatchLater, setIsWatchLater] = useState(false);
 
   if (!video) return <h1>No Video Found</h1>;
 
+  const handleLike = () => {
+    if (!user) return;
+    try {
+      if (isLiked) {
+        setlikes((prev: number) => prev - 1)
+        setIsLiked(false)
+
+      }
+      else {
+        setlikes((prev: number) => prev + 1)
+        setIsLiked(true)
+        if (isDisliked) {
+          setDislikes((prev: number) => prev - 1);
+          setIsDisliked(false);
+        }
+      }
+
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  const handleDislike = () => {
+    if (!user) return;
+    try {
+      if (isDisliked) {
+        setDislikes((prev: number) => prev - 1)
+        setIsDisliked(false)
+
+      }
+      else {
+        setDislikes((prev: number) => prev + 1)
+        setIsDisliked(true)
+        if (isLiked) {
+          setlikes((prev: number) => prev - 1);
+          setIsLiked(false);
+        }
+      }
+
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
     <div className="space-y-3">
@@ -64,7 +105,7 @@ const ChannelInfo = () => {
               variant="ghost"
               size="sm"
               className="rounded-l-full"
-            // onClick={handleLike}
+              onClick={handleLike}
             >
               <ThumbsUp
                 className={`w-5 h-5 mr-2 ${isLiked ? "fill-black text-black" : ""
@@ -77,7 +118,7 @@ const ChannelInfo = () => {
               variant="ghost"
               size="sm"
               className="rounded-r-full"
-            // onClick={handleDislike}
+              onClick={handleDislike}
             >
               <ThumbsDown
                 className={`w-5 h-5 mr-2 ${isDisliked ? "fill-black text-black" : ""
@@ -142,7 +183,7 @@ const ChannelInfo = () => {
         </Button>
       </div>
     </div>
- 
+
   );
 };
 
