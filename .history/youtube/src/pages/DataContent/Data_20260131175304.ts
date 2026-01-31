@@ -143,8 +143,3 @@ export const user = [
     email: "karan.gupta74@example.com",
   },
 ];
-
-export default {
-  ALL_VIDEOS,
-  user,
-};

@@ -146,5 +146,5 @@ export const user = [
 
 export default {
   ALL_VIDEOS,
-  user,
+  user
 };

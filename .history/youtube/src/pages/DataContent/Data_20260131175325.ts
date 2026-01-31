@@ -91,6 +91,11 @@ const ALL_VIDEOS = [
   },
 ];
 
+export default {
+  ALL_VIDEOS,
+  user
+};
+
 export const user = [
   {
     id: "1",
@@ -143,8 +148,3 @@ export const user = [
     email: "karan.gupta74@example.com",
   },
 ];
-
-export default {
-  ALL_VIDEOS,
-  user,
-};

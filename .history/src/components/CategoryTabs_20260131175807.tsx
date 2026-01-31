@@ -1,7 +1,8 @@
 import React from 'react'
 import { useState } from "react";
-import { Button } from "./ui/button";
+Looking at the error and the context, the issue is with the import path for the Button component.The current import uses "@/components/ui/button" which appears to be incorrect.Based on the file structure and common React project conventions, this should likely be a relative import or use the correct alias path.
 
+    import { Button } from "../ui/button";
 
 
 const CategoryTabs = () => {
