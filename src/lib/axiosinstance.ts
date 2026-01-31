@@ -2,7 +2,7 @@ import axios from "axios";
 
 // Create axios instance with default config
 const axiosInstance = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000/api",
+  baseURL: process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:5000",
   timeout: 30000, // 30 seconds
   headers: {
     "Content-Type": "application/json",
@@ -46,5 +46,3 @@ axiosInstance.interceptors.response.use(
 );
 
 export default axiosInstance;
-
-

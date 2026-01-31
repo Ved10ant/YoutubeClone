@@ -53,9 +53,9 @@ const VideoOpenToWatch = () => {
             <VideoPlayer video={video} />
             <RelatedVideos videos={relatedVideos} />
           </div>
-          <div className=" items-center mt-3">
+          <div className="items-center mt-3">
             <ChannelInfo />
-            <Comments videoId=" " />
+            <Comments videoId={String(id || video?._id || "")} />
           </div>
         </div>
       </div>

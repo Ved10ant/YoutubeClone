@@ -13,6 +13,8 @@ import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useUser } from '../lib/AuthContext'
+import { useSidebar } from '../lib/SidebarContext'
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -25,26 +27,16 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import ChannelDialog from "@/components/ChannelDialog";
 
 const Navbar = () => {
-    const [user, setUser] = useState<any>({
-        id: "1",
-        name: "John Doe",
-        email: "john@example.com",
-        image: "https://github.com/shadcn.png?height=32&width=32",
-        channelname: null, // Track if user has a channel
-    });
-
+    const { user, logout, handlegooglesignin } = useUser();
+    const { toggleSidebar } = useSidebar();
     const [searchQuery, setSearchQuery] = useState("");
     const [isdialogeopen, setisdialogeopen] = useState(false);
+    const router = useRouter();
 
     const handleChannelCreated = (channelName: string) => {
-        // Update user object with channel name
-        setUser((prev: any) => ({
-            ...prev,
-            channelname: channelName,
-        }));
+        // Channel created - page refresh will update user state from backend
+        setisdialogeopen(false);
     };
-
-    const router = useRouter();
 
     const handleSearch = (e: React.FormEvent) => {
         e.preventDefault();
@@ -52,20 +44,19 @@ const Navbar = () => {
             router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
         }
     };
+
+
     const handleKeypress = (e: React.KeyboardEvent) => {
         if (e.key === "Enter") {
-            handleSearch(e as any);
+            handleSearch(e as React.FormEvent);
         }
-    }
-    function logout() {
-
     }
 
     return (
         <header className="flex items-center justify-between px-4 py-2 bg-white border-b">
 
             <div className="flex items-center gap-4 w-1/4">
-                <Button variant="secondary" size="icon">
+                <Button variant="secondary" size="icon" onClick={toggleSidebar}>
                     <Menu className="w-6 h-6" />
                 </Button>
 
@@ -163,8 +154,12 @@ const Navbar = () => {
                         </DropdownMenu>
                     </>
                 ) : (
-                    <Button>
-                        <User className="w-4 h-4" /> Sign in
+                    <Button
+                        className="flex items-center gap-2"
+                        onClick={handlegooglesignin}
+                    >
+                        <User className="w-4 h-4" />
+                        Sign in
                     </Button>
                 )}
             </div>
@@ -172,6 +167,7 @@ const Navbar = () => {
                 isOpen={isdialogeopen}
                 onClose={() => setisdialogeopen(false)}
                 onChannelCreated={handleChannelCreated}
+                userId={user?.id || ""}
             />
         </header>
     );

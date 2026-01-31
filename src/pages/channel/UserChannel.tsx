@@ -55,7 +55,6 @@ const UserChannel = () => {
         </div>
         <div className="px-4 pb-8">
           <ChannelVideos videos={channelVideos} />
-          <Comments />
         </div>
       </div>
     </div>

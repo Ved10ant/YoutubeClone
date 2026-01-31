@@ -2,7 +2,24 @@ import React, { useState } from "react";
 import { Avatar, AvatarFallback } from "./ui/avatar";
 import { Button } from "./ui/button";
 
-const ChannelHeader = ({ channel, user }: any) => {
+interface Channel {
+  _id: string;
+  username: string;
+  description?: string;
+}
+
+interface User {
+  _id: string;
+  username: string;
+}
+
+const ChannelHeader = ({
+  channel,
+  user,
+}: {
+  channel: Channel;
+  user: User;
+}) => {
   const [isSubscribed, setisSubscribed] = useState(false);
 
   return (

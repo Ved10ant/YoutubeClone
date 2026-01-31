@@ -13,11 +13,18 @@ import {
 } from "lucide-react";
 import { formatDistanceToNow } from "date-fns";
 
-
 const ChannelInfo = () => {
   const router = useRouter();
   const { id } = router.query;
-  const video = ALL_VIDEOS.find((v) => String(v._id) === String(id));
+
+  // Check if we're on a video page (has id parameter)
+  const isVideoPage =
+    (router.pathname.includes("/watch/") ||
+      router.pathname.includes("/WatchVideo/")) &&
+    id;
+  const video = isVideoPage
+    ? ALL_VIDEOS.find((v) => String(v._id) === String(id))
+    : undefined;
 
   // Always call hooks unconditionally
   const [isSubscribed, setIsSubscribed] = useState(false);
@@ -27,50 +34,55 @@ const ChannelInfo = () => {
   const [isDisliked, setIsDisliked] = useState(false);
   const [showFullDescription, setShowFullDescription] = useState(false);
 
-  if (!video) return <h1>No Video Found</h1>;
+  // Update likes/dislikes when video changes
+  useEffect(() => {
+    if (video) {
+      setlikes(video.Like || 0);
+      setDislikes(video.Dislike || 0);
+      setIsLiked(false);
+      setIsDisliked(false);
+    }
+  }, [video]);
+
+  // Only render if we're on a video page and video exists
+  if (!isVideoPage || !video) return null;
 
   const handleLike = () => {
     if (!user) return;
     try {
       if (isLiked) {
-        setlikes((prev: number) => prev - 1)
-        setIsLiked(false)
-
-      }
-      else {
-        setlikes((prev: number) => prev + 1)
-        setIsLiked(true)
+        setlikes((prev: number) => prev - 1);
+        setIsLiked(false);
+      } else {
+        setlikes((prev: number) => prev + 1);
+        setIsLiked(true);
         if (isDisliked) {
           setDislikes((prev: number) => prev - 1);
           setIsDisliked(false);
         }
       }
-
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
   const handleDislike = () => {
     if (!user) return;
     try {
       if (isDisliked) {
-        setDislikes((prev: number) => prev - 1)
-        setIsDisliked(false)
-
-      }
-      else {
-        setDislikes((prev: number) => prev + 1)
-        setIsDisliked(true)
+        setDislikes((prev: number) => prev - 1);
+        setIsDisliked(false);
+      } else {
+        setDislikes((prev: number) => prev + 1);
+        setIsDisliked(true);
         if (isLiked) {
           setlikes((prev: number) => prev - 1);
           setIsLiked(false);
         }
       }
-
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   return (
     <div className="space-y-3">
@@ -108,8 +120,9 @@ const ChannelInfo = () => {
               onClick={handleLike}
             >
               <ThumbsUp
-                className={`w-5 h-5 mr-2 ${isLiked ? "fill-black text-black" : ""
-                  }`}
+                className={`w-5 h-5 mr-2 ${
+                  isLiked ? "fill-black text-black" : ""
+                }`}
               />
               {likes.toLocaleString()}
             </Button>
@@ -121,8 +134,9 @@ const ChannelInfo = () => {
               onClick={handleDislike}
             >
               <ThumbsDown
-                className={`w-5 h-5 mr-2 ${isDisliked ? "fill-black text-black" : ""
-                  }`}
+                className={`w-5 h-5 mr-2 ${
+                  isDisliked ? "fill-black text-black" : ""
+                }`}
               />
               {dislikes.toLocaleString()}
             </Button>
@@ -183,7 +197,6 @@ const ChannelInfo = () => {
         </Button>
       </div>
     </div>
-
   );
 };
 
