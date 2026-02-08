@@ -23,7 +23,7 @@ const ChannelInfo = () => {
       router.pathname.includes("/WatchVideo/")) &&
     id;
   const video = isVideoPage
-    ? data.ALL_VIDEOS.find((v) => String(v._id) === String(id))
+    ? ALL_VIDEOS.find((v) => String(v._id) === String(id))
     : undefined;
 
   // Always call hooks unconditionally
@@ -48,7 +48,7 @@ const ChannelInfo = () => {
   if (!isVideoPage || !video) return null;
 
   const handleLike = () => {
-    if (!data.user) return;
+    if (!user) return;
     try {
       if (isLiked) {
         setlikes((prev: number) => prev - 1);
@@ -66,7 +66,7 @@ const ChannelInfo = () => {
     }
   };
   const handleDislike = () => {
-    if (!data.user) return;
+    if (!user) return;
     try {
       if (isDisliked) {
         setDislikes((prev: number) => prev - 1);

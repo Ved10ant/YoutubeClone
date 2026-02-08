@@ -10,7 +10,7 @@ const VideoGrid = () => {
   // ❌ REMOVED: const videos = [...] (The hardcoded array)
 
   // 🟢 Use the imported array
-  const videos = data.ALL_VIDEOS;
+  const videos = ALL_VIDEOS;
 
   useEffect(() => {
     // In a real app, this is where you'd fetch data.

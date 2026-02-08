@@ -10,7 +10,7 @@ import data from "@/lib/data/videos";
 const UserChannel = () => {
   const router = useRouter();
   const { id } = router.query;
-  const [channel, setChannel] = useState<{ _id: string; username: string; email: string } | null>(null);
+  const [channel, setChannel] = useState<{_id: string; username: string; email: string} | null>(null);
   const [channelVideos, setChannelVideos] = useState<any[]>([]);
 
   useEffect(() => {
@@ -20,18 +20,13 @@ const UserChannel = () => {
 
     // Find the channel/user by ID from route params, or use first user as default
     const channelId = id ? String(id) : "1";
-    const foundUserData = data.user.find((u) => u.id === channelId) || data.user[0];
-    const transformedChannel = {
-      _id: foundUserData.id,
-      username: foundUserData.username,
-      email: foundUserData.email
-    };
-    setChannel(transformedChannel);
+    const foundChannel = data.user.find((u) => u.id === channelId) || data.user[0];
+    setChannel(foundChannel);
 
     // Filter videos by channel name (matching videochanel field)
-    if (transformedChannel) {
+    if (foundChannel) {
       const videos = data.ALL_VIDEOS.filter(
-        (video) => video.videochanel === transformedChannel.username
+        (video) => video.videochanel === foundChannel.username
       );
       setChannelVideos(videos);
     }
@@ -52,12 +47,12 @@ const UserChannel = () => {
       <div className="max-w-full mx-auto">
         <ChannelHeader
           channel={channel}
-          user={{ _id: data.user[0].id, username: data.user[0].username }}
+          user={data.user.map(u => ({ _id: u.id, username: u.username }))}
         />
         <ChannelTabs />
         <div className="px-4 pb-8">
           <VideoUploader
-            channelId={channel._id}
+            channelId={channel.id}
             channelName={channel.username}
           />
         </div>

@@ -52,15 +52,15 @@ const LikeVideos = () => {
         video: {
           _id: "1",
           videotitle:
-            data.ALL_VIDEOS.find((v) => v._id === "1")?.videotitle ||
+            ALL_VIDEOS.find((v) => v._id === "1")?.videotitle ||
             "Amazing Nature Documentary",
           videochanel:
-            data.ALL_VIDEOS.find((v) => v._id === "1")?.videochanel ||
+            ALL_VIDEOS.find((v) => v._id === "1")?.videochanel ||
             "Nature Channel",
-          view: data.ALL_VIDEOS.find((v) => v._id === "1")?.views || 45000,
-          filepath: data.ALL_VIDEOS.find((v) => v._id === "1")?.filepath || "",
+          view: ALL_VIDEOS.find((v) => v._id === "1")?.views || 45000,
+          filepath: ALL_VIDEOS.find((v) => v._id === "1")?.filepath || "",
           createdat:
-            data.ALL_VIDEOS.find((v) => v._id === "1")?.createdAt ||
+            ALL_VIDEOS.find((v) => v._id === "1")?.createdAt ||
             new Date().toISOString(),
         },
       },
@@ -71,15 +71,15 @@ const LikeVideos = () => {
         video: {
           _id: "4",
           videotitle:
-            data.ALL_VIDEOS.find((v) => v._id === "4")?.videotitle ||
+            ALL_VIDEOS.find((v) => v._id === "4")?.videotitle ||
             "SouthIndies vs India",
           videochanel:
-            data.ALL_VIDEOS.find((v) => v._id === "4")?.videochanel ||
+            ALL_VIDEOS.find((v) => v._id === "4")?.videochanel ||
             "Sport Highlights",
-          view: data.ALL_VIDEOS.find((v) => v._id === "4")?.views || 350000,
-          filepath: data.ALL_VIDEOS.find((v) => v._id === "4")?.filepath || "",
+          view: ALL_VIDEOS.find((v) => v._id === "4")?.views || 350000,
+          filepath: ALL_VIDEOS.find((v) => v._id === "4")?.filepath || "",
           createdat:
-            data.ALL_VIDEOS.find((v) => v._id === "4")?.createdAt ||
+            ALL_VIDEOS.find((v) => v._id === "4")?.createdAt ||
             new Date(Date.now() - 604800000).toISOString(),
         },
       },
@@ -90,14 +90,14 @@ const LikeVideos = () => {
         video: {
           _id: "5",
           videotitle:
-            data.ALL_VIDEOS.find((v) => v._id === "5")?.videotitle ||
+            ALL_VIDEOS.find((v) => v._id === "5")?.videotitle ||
             "TriggerInsan's Latest VLOG",
           videochanel:
-            data.ALL_VIDEOS.find((v) => v._id === "5")?.videochanel || "Trigger",
-          view: data.ALL_VIDEOS.find((v) => v._id === "5")?.views || 25000,
-          filepath: data.ALL_VIDEOS.find((v) => v._id === "5")?.filepath || "",
+            ALL_VIDEOS.find((v) => v._id === "5")?.videochanel || "Trigger",
+          view: ALL_VIDEOS.find((v) => v._id === "5")?.views || 25000,
+          filepath: ALL_VIDEOS.find((v) => v._id === "5")?.filepath || "",
           createdat:
-            data.ALL_VIDEOS.find((v) => v._id === "5")?.createdAt ||
+            ALL_VIDEOS.find((v) => v._id === "5")?.createdAt ||
             new Date(Date.now() - 1209600000).toISOString(),
         },
       },

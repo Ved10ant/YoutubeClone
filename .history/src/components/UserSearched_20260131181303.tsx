@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import data from "@/lib/data/videos";
+import { ALL_VIDEOS } from "@/lib/data/videos";
 import { formatDistanceToNow } from "date-fns";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
@@ -16,7 +16,7 @@ const UserSearched = ({ query }: UserSearchedProps) => {
   useEffect(() => {
     if (!query) return;
 
-    const filtered = data.ALL_VIDEOS.filter(
+    const filtered = ALL_VIDEOS.filter(
       (vid) =>
         vid.videotitle.toLowerCase().includes(query.toLowerCase()) ||
         vid.videochanel.toLowerCase().includes(query.toLowerCase())

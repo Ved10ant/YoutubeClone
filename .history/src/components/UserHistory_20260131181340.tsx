@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import data from "@/lib/data/videos";
-import { MoreVertical, X, ThumbsUp } from "lucide-react";
+import { MoreVertical, X, Clock } from "lucide-react";
 import Link from "next/link";
 import { Button } from "./ui/button";
 import { formatDistanceToNow } from "date-fns";
@@ -14,10 +14,10 @@ import {
 // ---------------------------
 // INTERFACE
 // ---------------------------
-interface LikedItems {
+interface HistoryItems {
   _id: string;
   videoid: string;
-  liked_on: string;
+  watched_on: string;
   video: {
     _id: string;
     videotitle: string;
@@ -28,14 +28,14 @@ interface LikedItems {
   };
 }
 
-const LikeVideos = () => {
-  const [likedVideos, setLikedVideos] = useState<LikedItems[]>([]);
+const UserHistory = () => {
+  const [history, setHistory] = useState<HistoryItems[]>([]);
   const [loading, setLoading] = useState(true);
 
   const AllUsers = data.user;
 
   // ---------------------------
-  // LOAD DUMMY LIKED VIDEOS DATA
+  // LOAD DUMMY HISTORY DATA
   // ---------------------------
   useEffect(() => {
     if (!AllUsers || AllUsers.length === 0) {
@@ -43,12 +43,12 @@ const LikeVideos = () => {
       return;
     }
 
-    // Map liked videos using ALL_VIDEOS data to get correct filepaths
-    const LikedData: LikedItems[] = [
+    // Map history items using ALL_VIDEOS data to get correct filepaths
+    const HistoryData: HistoryItems[] = [
       {
-        _id: "l1",
+        _id: "h1",
         videoid: "1",
-        liked_on: new Date(Date.now() - 2 * 3600 * 1000).toISOString(), // 2 hours ago
+        watched_on: new Date(Date.now() - 3600 * 1000).toISOString(), // 1 hour ago
         video: {
           _id: "1",
           videotitle:
@@ -65,53 +65,72 @@ const LikeVideos = () => {
         },
       },
       {
-        _id: "l2",
-        videoid: "4",
-        liked_on: new Date(Date.now() - 1 * 86400000).toISOString(), // 1 day ago
+        _id: "h2",
+        videoid: "2",
+        watched_on: new Date(Date.now() - 5 * 3600 * 1000).toISOString(), // 5 hours ago
         video: {
-          _id: "4",
+          _id: "2",
           videotitle:
-            data.ALL_VIDEOS.find((v) => v._id === "4")?.videotitle ||
-            "SouthIndies vs India",
+            ALL_VIDEOS.find((v) => v._id === "2")?.videotitle ||
+            "Cooking Tutorial: Perfect Pasta",
           videochanel:
-            data.ALL_VIDEOS.find((v) => v._id === "4")?.videochanel ||
-            "Sport Highlights",
-          view: data.ALL_VIDEOS.find((v) => v._id === "4")?.views || 350000,
-          filepath: data.ALL_VIDEOS.find((v) => v._id === "4")?.filepath || "",
+            ALL_VIDEOS.find((v) => v._id === "2")?.videochanel ||
+            "Chef's Kitchen",
+          view: ALL_VIDEOS.find((v) => v._id === "2")?.views || 23000,
+          filepath: ALL_VIDEOS.find((v) => v._id === "2")?.filepath || "",
           createdat:
-            data.ALL_VIDEOS.find((v) => v._id === "4")?.createdAt ||
-            new Date(Date.now() - 604800000).toISOString(),
+            ALL_VIDEOS.find((v) => v._id === "2")?.createdAt ||
+            new Date(Date.now() - 86400000).toISOString(),
         },
       },
       {
-        _id: "l3",
-        videoid: "5",
-        liked_on: new Date(Date.now() - 3 * 86400000).toISOString(), // 3 days ago
+        _id: "h3",
+        videoid: "3",
+        watched_on: new Date(Date.now() - 2 * 86400000).toISOString(), // 2 days ago
         video: {
-          _id: "5",
+          _id: "3",
           videotitle:
-            data.ALL_VIDEOS.find((v) => v._id === "5")?.videotitle ||
-            "TriggerInsan's Latest VLOG",
+            ALL_VIDEOS.find((v) => v._id === "3")?.videotitle ||
+            "RenGoku vs Mussa",
           videochanel:
-            data.ALL_VIDEOS.find((v) => v._id === "5")?.videochanel || "Trigger",
-          view: data.ALL_VIDEOS.find((v) => v._id === "5")?.views || 25000,
-          filepath: data.ALL_VIDEOS.find((v) => v._id === "5")?.filepath || "",
+            ALL_VIDEOS.find((v) => v._id === "3")?.videochanel || "golu_yeager",
+          view: ALL_VIDEOS.find((v) => v._id === "3")?.views || 25000,
+          filepath: ALL_VIDEOS.find((v) => v._id === "3")?.filepath || "",
           createdat:
-            data.ALL_VIDEOS.find((v) => v._id === "5")?.createdAt ||
-            new Date(Date.now() - 1209600000).toISOString(),
+            ALL_VIDEOS.find((v) => v._id === "3")?.createdAt ||
+            new Date(Date.now() - 172800000).toISOString(),
+        },
+      },
+      {
+        _id: "h4",
+        videoid: "4",
+        watched_on: new Date(Date.now() - 4 * 86400000).toISOString(), // 4 days ago
+        video: {
+          _id: "4",
+          videotitle:
+            ALL_VIDEOS.find((v) => v._id === "4")?.videotitle ||
+            "SouthIndies vs India",
+          videochanel:
+            ALL_VIDEOS.find((v) => v._id === "4")?.videochanel ||
+            "Sport Highlights",
+          view: ALL_VIDEOS.find((v) => v._id === "4")?.views || 350000,
+          filepath: ALL_VIDEOS.find((v) => v._id === "4")?.filepath || "",
+          createdat:
+            ALL_VIDEOS.find((v) => v._id === "4")?.createdAt ||
+            new Date(Date.now() - 604800000).toISOString(),
         },
       },
     ];
 
-    setLikedVideos(LikedData);
+    setHistory(HistoryData);
     setLoading(false);
   }, []);
 
   // ---------------------------
-  // REMOVE FROM LIKED VIDEOS
+  // REMOVE FROM HISTORY
   // ---------------------------
-  const handleRemoveFromLiked = (likedId: string) => {
-    setLikedVideos((prev) => prev.filter((item) => item._id !== likedId));
+  const handleRemoveFromHistory = (historyId: string) => {
+    setHistory((prev) => prev.filter((item) => item._id !== historyId));
   };
 
   // ---------------------------
@@ -127,26 +146,26 @@ const LikeVideos = () => {
   if (!AllUsers || AllUsers.length === 0) {
     return (
       <div className="text-center py-12">
-        <ThumbsUp className="w-16 h-16 mx-auto text-gray-400 mb-4" />
+        <Clock className="w-16 h-16 mx-auto text-gray-400 mb-4" />
         <h2 className="text-xl font-semibold mb-2">
-          Keep track of videos you like
+          Keep track of what you watch
         </h2>
         <p className="text-gray-600">
-          Liked videos are not viewable when signed out.
+          Watch history is not viewable when signed out.
         </p>
       </div>
     );
   }
 
   // ---------------------------
-  // EMPTY LIKED VIDEOS
+  // EMPTY HISTORY
   // ---------------------------
-  if (likedVideos.length === 0) {
+  if (history.length === 0) {
     return (
       <div className="text-center py-12">
-        <ThumbsUp className="w-16 h-16 mx-auto text-gray-400 mb-4" />
-        <h2 className="text-xl font-semibold mb-2">No liked videos yet</h2>
-        <p className="text-gray-600">Videos you like will appear here.</p>
+        <Clock className="w-16 h-16 mx-auto text-gray-400 mb-4" />
+        <h2 className="text-xl font-semibold mb-2">No watch history yet</h2>
+        <p className="text-gray-600">Videos you watch will appear here.</p>
       </div>
     );
   }
@@ -157,29 +176,29 @@ const LikeVideos = () => {
   return (
     <div className="space-y-4">
       <div className="flex justify-between items-center">
-        <p className="text-sm text-gray-600">{likedVideos.length} videos</p>
+        <p className="text-sm text-gray-600">{history.length} videos</p>
       </div>
 
       <div className="space-y-4">
-        {likedVideos.map((item) => (
+        {history.map((item) => (
           <div key={item._id} className="flex gap-4 group">
             {/* Video Thumbnail */}
             <Link href={`/watch/${item.video._id}`}>
               <div className="relative w-40 aspect-video bg-gray-100 rounded overflow-hidden shrink-0">
+                {/* Sometimes src may be undefined or invalid, fallback to a sample video for testing */}
                 <video
-                  src={
-                    item.video?.filepath ||
-                    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4"
-                  }
+                  src={item.video?.filepath || "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4"}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
                   muted
                   playsInline
                   preload="metadata"
                   width={160}
                   height={90}
-                  onError={(e) => {
-                    e.currentTarget.poster =
-                      "https://via.placeholder.com/160x90?text=No+Preview";
+                  // Optionally show controls for debug:
+                  // controls
+                  onError={e => {
+                    // If video fails to load, show placeholder or fallback
+                    e.currentTarget.poster = "https://via.placeholder.com/160x90?text=No+Preview";
                   }}
                 />
               </div>
@@ -201,24 +220,27 @@ const LikeVideos = () => {
               </p>
 
               <p className="text-xs text-gray-500 mt-1">
-                Liked {formatDistanceToNow(new Date(item.liked_on))} ago
+                Watched {formatDistanceToNow(new Date(item.watched_on))} ago
               </p>
             </div>
 
             {/* Options Menu */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="secondary" size="icon">
+                <Button
+                  variant="secondary"
+                  size="icon"
+                >
                   <MoreVertical className="w-4 h-4" />
                 </Button>
               </DropdownMenuTrigger>
 
               <DropdownMenuContent align="end">
                 <DropdownMenuItem
-                  onClick={() => handleRemoveFromLiked(item._id)}
+                  onClick={() => handleRemoveFromHistory(item._id)}
                 >
                   <X className="w-4 h-4 mr-2" />
-                  Remove from liked videos
+                  Remove from watch history
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
@@ -229,4 +251,4 @@ const LikeVideos = () => {
   );
 };
 
-export default LikeVideos;
+export default UserHistory;

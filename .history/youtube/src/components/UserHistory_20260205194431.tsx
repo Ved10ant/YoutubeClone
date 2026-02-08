@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import data from "@/lib/data/videos";
+import { user, ALL_VIDEOS } from "../pages/DataContent/data";
 import { MoreVertical, X, Clock } from "lucide-react";
 import Link from "next/link";
 import { Button } from "./ui/button";
@@ -32,7 +32,7 @@ const UserHistory = () => {
   const [history, setHistory] = useState<HistoryItems[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const AllUsers = data.user;
+  const AllUsers = user;
 
   // ---------------------------
   // LOAD DUMMY HISTORY DATA
@@ -52,15 +52,15 @@ const UserHistory = () => {
         video: {
           _id: "1",
           videotitle:
-            data.ALL_VIDEOS.find((v) => v._id === "1")?.videotitle ||
+            ALL_VIDEOS.find((v) => v._id === "1")?.videotitle ||
             "Amazing Nature Documentary",
           videochanel:
-            data.ALL_VIDEOS.find((v) => v._id === "1")?.videochanel ||
+            ALL_VIDEOS.find((v) => v._id === "1")?.videochanel ||
             "Nature Channel",
-          view: data.ALL_VIDEOS.find((v) => v._id === "1")?.views || 45000,
-          filepath: data.ALL_VIDEOS.find((v) => v._id === "1")?.filepath || "",
+          view: ALL_VIDEOS.find((v) => v._id === "1")?.views || 45000,
+          filepath: ALL_VIDEOS.find((v) => v._id === "1")?.filepath || "",
           createdat:
-            data.ALL_VIDEOS.find((v) => v._id === "1")?.createdAt ||
+            ALL_VIDEOS.find((v) => v._id === "1")?.createdAt ||
             new Date().toISOString(),
         },
       },
@@ -71,15 +71,15 @@ const UserHistory = () => {
         video: {
           _id: "2",
           videotitle:
-            data.ALL_VIDEOS.find((v) => v._id === "2")?.videotitle ||
+            ALL_VIDEOS.find((v) => v._id === "2")?.videotitle ||
             "Cooking Tutorial: Perfect Pasta",
           videochanel:
-            data.ALL_VIDEOS.find((v) => v._id === "2")?.videochanel ||
+            ALL_VIDEOS.find((v) => v._id === "2")?.videochanel ||
             "Chef's Kitchen",
-          view: data.ALL_VIDEOS.find((v) => v._id === "2")?.views || 23000,
-          filepath: data.ALL_VIDEOS.find((v) => v._id === "2")?.filepath || "",
+          view: ALL_VIDEOS.find((v) => v._id === "2")?.views || 23000,
+          filepath: ALL_VIDEOS.find((v) => v._id === "2")?.filepath || "",
           createdat:
-            data.ALL_VIDEOS.find((v) => v._id === "2")?.createdAt ||
+            ALL_VIDEOS.find((v) => v._id === "2")?.createdAt ||
             new Date(Date.now() - 86400000).toISOString(),
         },
       },
@@ -90,14 +90,14 @@ const UserHistory = () => {
         video: {
           _id: "3",
           videotitle:
-            data.ALL_VIDEOS.find((v) => v._id === "3")?.videotitle ||
+            ALL_VIDEOS.find((v) => v._id === "3")?.videotitle ||
             "RenGoku vs Mussa",
           videochanel:
-            data.ALL_VIDEOS.find((v) => v._id === "3")?.videochanel || "golu_yeager",
-          view: data.ALL_VIDEOS.find((v) => v._id === "3")?.views || 25000,
-          filepath: data.ALL_VIDEOS.find((v) => v._id === "3")?.filepath || "",
+            ALL_VIDEOS.find((v) => v._id === "3")?.videochanel || "golu_yeager",
+          view: ALL_VIDEOS.find((v) => v._id === "3")?.views || 25000,
+          filepath: ALL_VIDEOS.find((v) => v._id === "3")?.filepath || "",
           createdat:
-            data.ALL_VIDEOS.find((v) => v._id === "3")?.createdAt ||
+            ALL_VIDEOS.find((v) => v._id === "3")?.createdAt ||
             new Date(Date.now() - 172800000).toISOString(),
         },
       },
@@ -108,15 +108,15 @@ const UserHistory = () => {
         video: {
           _id: "4",
           videotitle:
-            data.ALL_VIDEOS.find((v) => v._id === "4")?.videotitle ||
+            ALL_VIDEOS.find((v) => v._id === "4")?.videotitle ||
             "SouthIndies vs India",
           videochanel:
-            data.ALL_VIDEOS.find((v) => v._id === "4")?.videochanel ||
+            ALL_VIDEOS.find((v) => v._id === "4")?.videochanel ||
             "Sport Highlights",
-          view: data.ALL_VIDEOS.find((v) => v._id === "4")?.views || 350000,
-          filepath: data.ALL_VIDEOS.find((v) => v._id === "4")?.filepath || "",
+          view: ALL_VIDEOS.find((v) => v._id === "4")?.views || 350000,
+          filepath: ALL_VIDEOS.find((v) => v._id === "4")?.filepath || "",
           createdat:
-            data.ALL_VIDEOS.find((v) => v._id === "4")?.createdAt ||
+            ALL_VIDEOS.find((v) => v._id === "4")?.createdAt ||
             new Date(Date.now() - 604800000).toISOString(),
         },
       },

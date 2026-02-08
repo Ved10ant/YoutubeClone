@@ -52,7 +52,7 @@ const UserChannel = () => {
       <div className="max-w-full mx-auto">
         <ChannelHeader
           channel={channel}
-          user={{ _id: data.user[0].id, username: data.user[0].username }}
+          user={data.user.map(u => ({ _id: u.id, username: u.username }))}
         />
         <ChannelTabs />
         <div className="px-4 pb-8">

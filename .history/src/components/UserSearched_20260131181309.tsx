@@ -16,7 +16,7 @@ const UserSearched = ({ query }: UserSearchedProps) => {
   useEffect(() => {
     if (!query) return;
 
-    const filtered = data.ALL_VIDEOS.filter(
+    const filtered = ALL_VIDEOS.filter(
       (vid) =>
         vid.videotitle.toLowerCase().includes(query.toLowerCase()) ||
         vid.videochanel.toLowerCase().includes(query.toLowerCase())

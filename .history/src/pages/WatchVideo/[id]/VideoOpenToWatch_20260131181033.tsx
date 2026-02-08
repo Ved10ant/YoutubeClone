@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import CustomVideoPlayer from "@/components/CustomVideoPlayer";
-import data from "@/lib/data/videos";
+import data from "../../DataContent/data";
 import ChannelInfo from "@/components/ChannelInfo";
 import Comments from "@/components/Comments";
 import RelatedVideos from "@/components/RelatedVideo";

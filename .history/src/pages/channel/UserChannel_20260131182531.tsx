@@ -50,9 +50,9 @@ const UserChannel = () => {
   return (
     <div className="flex-1 min-h-screen bg-white">
       <div className="max-w-full mx-auto">
-        <ChannelHeader
-          channel={channel}
-          user={{ _id: data.user[0].id, username: data.user[0].username }}
+        <ChannelHeader 
+          channel={channel} 
+          user={{ _id: data.user[0].id, username: data.user[0].username }} 
         />
         <ChannelTabs />
         <div className="px-4 pb-8">

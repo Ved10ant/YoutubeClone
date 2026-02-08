@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import CustomVideoPlayer from "@/components/CustomVideoPlayer";
-import data from "@/lib/data/videos";
+import { ALL_VIDEOS } from "../../DataContent/Data";
 import ChannelInfo from "@/components/ChannelInfo";
 import Comments from "@/components/Comments";
 import RelatedVideos from "@/components/RelatedVideo";
@@ -22,7 +22,7 @@ const VideoOpenToWatch = () => {
 
   const [video, setVideo] = useState<Video | undefined>(undefined);
 
-  const relatedVideos = data.ALL_VIDEOS;
+  const relatedVideos = ALL_VIDEOS;
 
   useEffect(() => {
     if (!router.isReady) {
@@ -50,24 +50,7 @@ const VideoOpenToWatch = () => {
       <div className="flex flex-col lg:flex-row gap-6">
         <div className="flex-1 w-full">
           <div className="flex gap-6 justify-end">
-            <CustomVideoPlayer
-              video={video}
-              onNextVideo={() => {
-                // Find next video in the list
-                const currentIndex = relatedVideos.findIndex((v: any) => v._id === video._id);
-                const nextIndex = (currentIndex + 1) % relatedVideos.length;
-                const nextVideo = relatedVideos[nextIndex];
-                router.push(`/watch/${nextVideo._id}`);
-              }}
-              onCloseVideo={() => {
-                // Navigate back to home or previous page
-                router.back();
-              }}
-              onShowComments={() => {
-                // Scroll to comments section
-                document.getElementById('comments-section')?.scrollIntoView({ behavior: 'smooth' });
-              }}
-            />
+            <VideoPlayer video={video} />
             <RelatedVideos videos={relatedVideos} />
           </div>
           <div className="items-center mt-3">

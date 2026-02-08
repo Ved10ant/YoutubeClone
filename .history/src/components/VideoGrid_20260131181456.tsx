@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 import VideoCard from "../components/VideoCard";
 // 🟢 IMPORT THE SHARED DATA
-import data from '@/lib/data/videos';
+import data from '@/lib/data/videos'; 
 
 const VideoGrid = () => {
   const [loading, setLoading] = useState(true);
 
   // ❌ REMOVED: const TEST_VIDEO_URL = ... 
   // ❌ REMOVED: const videos = [...] (The hardcoded array)
-
+  
   // 🟢 Use the imported array
-  const videos = data.ALL_VIDEOS;
+  const videos = data.ALL_VIDEOS; 
 
   useEffect(() => {
     // In a real app, this is where you'd fetch data.

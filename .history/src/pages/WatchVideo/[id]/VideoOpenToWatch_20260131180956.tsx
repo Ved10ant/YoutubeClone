@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import CustomVideoPlayer from "@/components/CustomVideoPlayer";
-import data from "@/lib/data/videos";
+import data from "../../DataContent/data";
 import ChannelInfo from "@/components/ChannelInfo";
 import Comments from "@/components/Comments";
 import RelatedVideos from "@/components/RelatedVideo";
@@ -50,8 +50,8 @@ const VideoOpenToWatch = () => {
       <div className="flex flex-col lg:flex-row gap-6">
         <div className="flex-1 w-full">
           <div className="flex gap-6 justify-end">
-            <CustomVideoPlayer
-              video={video}
+            <CustomVideoPlayer 
+              video={video} 
               onNextVideo={() => {
                 // Find next video in the list
                 const currentIndex = relatedVideos.findIndex((v: any) => v._id === video._id);

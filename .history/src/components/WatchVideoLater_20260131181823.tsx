@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import data from "@/lib/data/videos";
-import { MoreVertical, X, ThumbsUp } from "lucide-react";
+import { MoreVertical, X, Clock } from "lucide-react";
 import Link from "next/link";
 import { Button } from "./ui/button";
 import { formatDistanceToNow } from "date-fns";
@@ -14,10 +14,10 @@ import {
 // ---------------------------
 // INTERFACE
 // ---------------------------
-interface LikedItems {
+interface WatchLaterItems {
   _id: string;
   videoid: string;
-  liked_on: string;
+  saved_on: string;
   video: {
     _id: string;
     videotitle: string;
@@ -28,14 +28,14 @@ interface LikedItems {
   };
 }
 
-const LikeVideos = () => {
-  const [likedVideos, setLikedVideos] = useState<LikedItems[]>([]);
+const WatchVideoLater = () => {
+  const [watchLater, setWatchLater] = useState<WatchLaterItems[]>([]);
   const [loading, setLoading] = useState(true);
 
   const AllUsers = data.user;
 
   // ---------------------------
-  // LOAD DUMMY LIKED VIDEOS DATA
+  // LOAD DUMMY WATCH LATER DATA
   // ---------------------------
   useEffect(() => {
     if (!AllUsers || AllUsers.length === 0) {
@@ -43,75 +43,74 @@ const LikeVideos = () => {
       return;
     }
 
-    // Map liked videos using ALL_VIDEOS data to get correct filepaths
-    const LikedData: LikedItems[] = [
+    // Map watch later items using ALL_VIDEOS data to get correct filepaths
+    const WatchLaterData: WatchLaterItems[] = [
       {
-        _id: "l1",
-        videoid: "1",
-        liked_on: new Date(Date.now() - 2 * 3600 * 1000).toISOString(), // 2 hours ago
+        _id: "wl1",
+        videoid: "2",
+        saved_on: new Date(Date.now() - 6 * 3600 * 1000).toISOString(), // 6 hours ago
         video: {
-          _id: "1",
+          _id: "2",
           videotitle:
-            data.ALL_VIDEOS.find((v) => v._id === "1")?.videotitle ||
-            "Amazing Nature Documentary",
+            ALL_VIDEOS.find((v) => v._id === "2")?.videotitle ||
+            "Cooking Tutorial: Perfect Pasta",
           videochanel:
-            data.ALL_VIDEOS.find((v) => v._id === "1")?.videochanel ||
-            "Nature Channel",
-          view: data.ALL_VIDEOS.find((v) => v._id === "1")?.views || 45000,
-          filepath: data.ALL_VIDEOS.find((v) => v._id === "1")?.filepath || "",
+            ALL_VIDEOS.find((v) => v._id === "2")?.videochanel ||
+            "Chef's Kitchen",
+          view: ALL_VIDEOS.find((v) => v._id === "2")?.views || 23000,
+          filepath: ALL_VIDEOS.find((v) => v._id === "2")?.filepath || "",
           createdat:
-            data.ALL_VIDEOS.find((v) => v._id === "1")?.createdAt ||
-            new Date().toISOString(),
+            ALL_VIDEOS.find((v) => v._id === "2")?.createdAt ||
+            new Date(Date.now() - 86400000).toISOString(),
         },
       },
       {
-        _id: "l2",
-        videoid: "4",
-        liked_on: new Date(Date.now() - 1 * 86400000).toISOString(), // 1 day ago
+        _id: "wl2",
+        videoid: "3",
+        saved_on: new Date(Date.now() - 1 * 86400000).toISOString(), // 1 day ago
         video: {
-          _id: "4",
+          _id: "3",
           videotitle:
-            data.ALL_VIDEOS.find((v) => v._id === "4")?.videotitle ||
-            "SouthIndies vs India",
+            ALL_VIDEOS.find((v) => v._id === "3")?.videotitle ||
+            "RenGoku vs Mussa",
           videochanel:
-            data.ALL_VIDEOS.find((v) => v._id === "4")?.videochanel ||
-            "Sport Highlights",
-          view: data.ALL_VIDEOS.find((v) => v._id === "4")?.views || 350000,
-          filepath: data.ALL_VIDEOS.find((v) => v._id === "4")?.filepath || "",
+            ALL_VIDEOS.find((v) => v._id === "3")?.videochanel || "golu_yeager",
+          view: ALL_VIDEOS.find((v) => v._id === "3")?.views || 25000,
+          filepath: ALL_VIDEOS.find((v) => v._id === "3")?.filepath || "",
           createdat:
-            data.ALL_VIDEOS.find((v) => v._id === "4")?.createdAt ||
-            new Date(Date.now() - 604800000).toISOString(),
+            ALL_VIDEOS.find((v) => v._id === "3")?.createdAt ||
+            new Date(Date.now() - 172800000).toISOString(),
         },
       },
       {
-        _id: "l3",
-        videoid: "5",
-        liked_on: new Date(Date.now() - 3 * 86400000).toISOString(), // 3 days ago
+        _id: "wl3",
+        videoid: "6",
+        saved_on: new Date(Date.now() - 2 * 86400000).toISOString(), // 2 days ago
         video: {
-          _id: "5",
+          _id: "6",
           videotitle:
-            data.ALL_VIDEOS.find((v) => v._id === "5")?.videotitle ||
-            "TriggerInsan's Latest VLOG",
+            ALL_VIDEOS.find((v) => v._id === "6")?.videotitle ||
+            "Musa's Best Dance Moves",
           videochanel:
-            data.ALL_VIDEOS.find((v) => v._id === "5")?.videochanel || "Trigger",
-          view: data.ALL_VIDEOS.find((v) => v._id === "5")?.views || 25000,
-          filepath: data.ALL_VIDEOS.find((v) => v._id === "5")?.filepath || "",
+            ALL_VIDEOS.find((v) => v._id === "6")?.videochanel || "golu_yeager",
+          view: ALL_VIDEOS.find((v) => v._id === "6")?.views || 10000,
+          filepath: ALL_VIDEOS.find((v) => v._id === "6")?.filepath || "",
           createdat:
-            data.ALL_VIDEOS.find((v) => v._id === "5")?.createdAt ||
-            new Date(Date.now() - 1209600000).toISOString(),
+            ALL_VIDEOS.find((v) => v._id === "6")?.createdAt ||
+            new Date(Date.now() - 2419200000).toISOString(),
         },
       },
     ];
 
-    setLikedVideos(LikedData);
+    setWatchLater(WatchLaterData);
     setLoading(false);
   }, []);
 
   // ---------------------------
-  // REMOVE FROM LIKED VIDEOS
+  // REMOVE FROM WATCH LATER
   // ---------------------------
-  const handleRemoveFromLiked = (likedId: string) => {
-    setLikedVideos((prev) => prev.filter((item) => item._id !== likedId));
+  const handleRemoveFromWatchLater = (watchLaterId: string) => {
+    setWatchLater((prev) => prev.filter((item) => item._id !== watchLaterId));
   };
 
   // ---------------------------
@@ -127,26 +126,28 @@ const LikeVideos = () => {
   if (!AllUsers || AllUsers.length === 0) {
     return (
       <div className="text-center py-12">
-        <ThumbsUp className="w-16 h-16 mx-auto text-gray-400 mb-4" />
+        <Clock className="w-16 h-16 mx-auto text-gray-400 mb-4" />
         <h2 className="text-xl font-semibold mb-2">
-          Keep track of videos you like
+          Save videos to watch later
         </h2>
         <p className="text-gray-600">
-          Liked videos are not viewable when signed out.
+          Watch later videos are not viewable when signed out.
         </p>
       </div>
     );
   }
 
   // ---------------------------
-  // EMPTY LIKED VIDEOS
+  // EMPTY WATCH LATER
   // ---------------------------
-  if (likedVideos.length === 0) {
+  if (watchLater.length === 0) {
     return (
       <div className="text-center py-12">
-        <ThumbsUp className="w-16 h-16 mx-auto text-gray-400 mb-4" />
-        <h2 className="text-xl font-semibold mb-2">No liked videos yet</h2>
-        <p className="text-gray-600">Videos you like will appear here.</p>
+        <Clock className="w-16 h-16 mx-auto text-gray-400 mb-4" />
+        <h2 className="text-xl font-semibold mb-2">No videos saved yet</h2>
+        <p className="text-gray-600">
+          Videos you save to watch later will appear here.
+        </p>
       </div>
     );
   }
@@ -157,11 +158,11 @@ const LikeVideos = () => {
   return (
     <div className="space-y-4">
       <div className="flex justify-between items-center">
-        <p className="text-sm text-gray-600">{likedVideos.length} videos</p>
+        <p className="text-sm text-gray-600">{watchLater.length} videos</p>
       </div>
 
       <div className="space-y-4">
-        {likedVideos.map((item) => (
+        {watchLater.map((item) => (
           <div key={item._id} className="flex gap-4 group">
             {/* Video Thumbnail */}
             <Link href={`/watch/${item.video._id}`}>
@@ -201,7 +202,7 @@ const LikeVideos = () => {
               </p>
 
               <p className="text-xs text-gray-500 mt-1">
-                Liked {formatDistanceToNow(new Date(item.liked_on))} ago
+                Saved {formatDistanceToNow(new Date(item.saved_on))} ago
               </p>
             </div>
 
@@ -215,10 +216,10 @@ const LikeVideos = () => {
 
               <DropdownMenuContent align="end">
                 <DropdownMenuItem
-                  onClick={() => handleRemoveFromLiked(item._id)}
+                  onClick={() => handleRemoveFromWatchLater(item._id)}
                 >
                   <X className="w-4 h-4 mr-2" />
-                  Remove from liked videos
+                  Remove from watch later
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
@@ -229,4 +230,4 @@ const LikeVideos = () => {
   );
 };
 
-export default LikeVideos;
+export default WatchVideoLater;
