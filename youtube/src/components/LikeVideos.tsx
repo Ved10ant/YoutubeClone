@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { user, ALL_VIDEOS } from "../pages/DataContent/Data";
+import { user, ALL_VIDEOS } from "../lib/data/videos";
 import { MoreVertical, X, ThumbsUp } from "lucide-react";
 import Link from "next/link";
 import { Button } from "./ui/button";

@@ -26,13 +26,18 @@ export default function VideoCard({ video }: VideoProps) {
 
         <div className="relative aspect-video rounded-lg overflow-hidden bg-gray-100">
           <video
-            src={smallVideo}
-            className="object-cover group-hover:scale-105 transition-transform duration-200"
+            src={video.filepath}
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
             muted
+            playsInline
+            preload="metadata"
             onMouseOver={(e) => e.currentTarget.play()}
             onMouseOut={(e) => {
               e.currentTarget.pause();
               e.currentTarget.currentTime = 0;
+            }}
+            onError={(e) => {
+              e.currentTarget.poster = "https://via.placeholder.com/640x360?text=Video+Unavailable";
             }}
           />
           <div className="absolute bottom-2 right-2 bg-black/80 text-white text-xs px-1 rounded">

@@ -7,6 +7,26 @@ const userSchema = mongoose.Schema({
   description: String,
   channelname: String,
   image: String,
+  isPremium: {
+    type: Boolean,
+    default: false,
+  },
+  downloads: [
+    {
+      videoId: String,
+      videoTitle: String,
+      videoThumbnail: String,
+      videoChannel: String,
+      downloadedAt: {
+        type: Date,
+        default: Date.now,
+      },
+    },
+  ],
+  lastDownloadDate: {
+    type: Date,
+    default: null,
+  },
   joindate: {
     type: Date,
     default: Date.now,

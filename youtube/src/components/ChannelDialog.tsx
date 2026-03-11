@@ -33,7 +33,7 @@ const ChannelDialog = ({
     setError("");
 
     try {
-      const response = await axiosInstance.post("/create-channel", {
+      const response = await axiosInstance.post("/user/create-channel", {
         userId,
         channelName: channelName.trim(),
       });

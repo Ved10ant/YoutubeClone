@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { ALL_VIDEOS } from "@/pages/DataContent/Data";
+import { ALL_VIDEOS } from "@/lib/data/videos";
 import { formatDistanceToNow } from "date-fns";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 

@@ -206,7 +206,7 @@ const Navbar = () => {
                         isOpen={isdialogeopen}
                         onClose={() => setisdialogeopen(false)}
                         onChannelCreated={handleChannelCreated}
-                        userId={user?.id || ""}
+                        userId={user?._id || user?.id || ""}
                     />
                 </>
             )}

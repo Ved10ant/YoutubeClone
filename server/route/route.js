@@ -8,11 +8,21 @@ import {
   deleteComment,
 } from "../controller/comment.js";
 
+import { createOrder, verifyPayment } from "../controller/payment.js";
+import { downloadVideo } from "../controller/user.js";
+
 const routes = express.Router();
 
 // Auth routes
 routes.post("/login", login);
 routes.post("/create-channel", createChannel);
+
+// Payment routes
+routes.post("/payment/orders", createOrder);
+routes.post("/payment/verify", verifyPayment);
+
+// User routes
+routes.post("/user/download", downloadVideo);
 
 // Comment routes
 routes.get("/comments/:videoId", getComments);

@@ -57,9 +57,14 @@ const translateText = async (text: string, targetLang: string = "en"): Promise<s
 const getUserCity = async (): Promise<string> => {
   try {
     const response = await fetch("https://ipapi.co/json/");
+    if (!response.ok) {
+      throw new Error("Failed to fetch IP data");
+    }
     const data = await response.json();
     return data.city || "Unknown";
   } catch (error) {
+    console.warn("Could not fetch user city:", error);
+    return "Unknown";
     console.error("Error fetching city:", error);
     return "Unknown";
   }

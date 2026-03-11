@@ -15,7 +15,7 @@ const TEST_VIDEO_URLS = {
 };
 
 // 🟢 EXPORT the full array of video objects for use in other components.
-const ALL_VIDEOS = [
+export const ALL_VIDEOS = [
   {
     _id: "1",
     videotitle: "Amazing Nature Documentary ",
@@ -94,51 +94,61 @@ const ALL_VIDEOS = [
 export const user = [
   {
     id: "1",
+    _id: "1",
     username: "Vedant Dighe",
     email: "vedantgighle202022@gmail.com",
   },
   {
     id: "2",
+    _id: "2",
     username: "Rohit Sharma",
     email: "rohit.sharma23@example.com",
   },
   {
     id: "3",
+    _id: "3",
     username: "Sneha Patil",
     email: "sneha.patil55@example.com",
   },
   {
     id: "4",
+    _id: "4",
     username: "Aarav Mehta",
     email: "aarav.mehta92@example.com",
   },
   {
     id: "5",
+    _id: "5",
     username: "Krisha Shah",
     email: "krisha.shah21@example.com",
   },
   {
     id: "6",
+    _id: "6",
     username: "Aditya Deshmukh",
     email: "aditya.deshmukh88@example.com",
   },
   {
     id: "7",
+    _id: "7",
     username: "Mahima Kulkarni",
     email: "mahima.kulkarni05@example.com",
   },
   {
     id: "8",
+    _id: "8",
     username: "Yash Verma",
     email: "yash.verma40@example.com",
   },
   {
     id: "9",
+    _id: "9",
     username: "Priya Nair",
     email: "priya.nair29@example.com",
   },
   {
     id: "10",
+    _id: "10",
     username: "Karan Gupta",
     email: "karan.gupta74@example.com",
   },

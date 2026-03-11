@@ -49,6 +49,11 @@ export const login = async (req, res) => {
 
 export const createChannel = async (req, res) => {
   const { userId, channelName } = req.body;
+
+  if (!userId || !channelName) {
+    return res.status(400).json({ message: "UserId and Channel Name are required" });
+  }
+
   try {
     const updatedUser = await users.findByIdAndUpdate(
       userId,
@@ -60,7 +65,7 @@ export const createChannel = async (req, res) => {
     }
     res.status(200).json({ result: updatedUser });
   } catch (err) {
-    console.log(`Error Occurred: ${err}`);
-    res.status(500).json({ message: "Error occurred while creating channel" });
+    console.error(`Error creating channel: ${err.message}`);
+    res.status(500).json({ message: "Error occurred while creating channel", error: err.message });
   }
 };

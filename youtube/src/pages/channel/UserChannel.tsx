@@ -5,7 +5,7 @@ import ChannelVideos from "@/components/ChannelVideos";
 import VideoUploader from "@/components/VideoUploader";
 import ChannelTabs from "@/components/ChannelTabs";
 import Comments from "@/components/Comments";
-import { user, ALL_VIDEOS } from "../DataContent/Data";
+import { user, ALL_VIDEOS } from "@/lib/data/videos";
 
 const UserChannel = () => {
   const router = useRouter();
@@ -45,7 +45,7 @@ const UserChannel = () => {
   return (
     <div className="flex-1 min-h-screen bg-white">
       <div className="max-w-full mx-auto">
-        <ChannelHeader channel={channel} user={user} />
+        <ChannelHeader channel={channel} user={user[0]} />
         <ChannelTabs />
         <div className="px-4 pb-8">
           <VideoUploader
